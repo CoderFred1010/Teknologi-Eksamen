@@ -1,0 +1,123 @@
+1. Grundbegreber
+
+Dockerfile: opskrift
+
+Image: bygget artefakt
+
+Container: kørende instans af et image
+
+👉 En container er ikke en VM:
+
+deler kernel
+
+er lettere og hurtigere
+
+2. Min Dockerfile – overblik
+
+Jeg bruger multi-stage build:
+
+Build stage
+
+Runtime stage
+
+Formål:
+
+adskille build og runtime
+
+mindre og mere sikkert image
+
+3. Build stage (Maven)
+FROM maven:3.9.11-eclipse-temurin-21 AS build
+
+
+Maven + JDK 21
+
+bygger .jar-filen
+
+RUN mvn clean package -DskipTests
+
+
+👉 Tests kører i CI, ikke i Docker build.
+
+4. Runtime stage
+FROM eclipse-temurin:21-jre-alpine
+
+
+Kun JRE
+
+Meget mindre image
+
+COPY --from=build /app/target/*.jar app.jar
+
+
+👉 Kun det færdige artefakt med.
+
+5. ENTRYPOINT
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
+Det betyder:
+
+containeren starter altid med den kommando
+
+svarer til: “det her er applikationen”
+
+6. Build og run
+
+Jeg bygger:
+
+docker build -t teknologi-eksamen .
+
+
+Jeg kører:
+
+docker run -p 8080:8080 teknologi-eksamen
+
+
+-p mapper host → container
+
+applikationen svarer på HTTP
+
+Jeg bekræftede det via:
+
+Whitelabel Error Page i browseren
+
+7. Fejlsøgning (meget vigtigt)
+
+Jeg havde en fejl:
+
+Spring Boot kunne ikke starte pga. datasource
+
+Løsning:
+
+embedded H2-database
+
+korrekt runtime-konfiguration
+
+fjernede WebFlux/WebMVC-konflikt
+
+👉 Det viser, at jeg kan:
+
+debugge Docker + Java
+
+forstå forskel på build- og runtime-fejl
+
+8. Docker og sikkerhed
+
+Ports åbnes eksplicit
+
+Kun nødvendige services kører
+
+Runtime-image er minimalt
+
+9. Opsummering (emne 2)
+
+Jeg kan forklare Dockerfile → image → container
+
+Jeg bruger multi-stage builds
+
+Jeg kan bygge og køre images
+
+Jeg kan fejlsøge reelle problemer
+
+Jeg har et image klar til deployment
