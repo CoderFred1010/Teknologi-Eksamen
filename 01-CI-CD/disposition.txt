@@ -1,165 +1,17 @@
-Disposition / taleoplæg
+1 Hvad er CI / CD
 
-1. Indledning – hvad er CI/CD? (kort)
+2 Hvad er pointen
 
-CI/CD står for Continuous Integration og Continuous Delivery.
+Hvert job kører i sit eget miljø (container)
+steps er enkelte sekvenser
 
-CI handler om:
+Eksempler
 
-automatisk at bygge og teste kode, hver gang der pushes
+Gå igennem Ci.yml
+gå igennem docker-ci.yml
+Gå i gennem Java-test
 
-CD (Delivery) handler om:
+gå igennem push-til-ghcr
 
-at gøre artefakter klar til deployment
 
-fx et Docker image
 
-👉 I mit projekt laver jeg CI + Delivery, men ikke automatisk deployment.
-
-2. Hvad tjekker man typisk i en CI-pipeline?
-
-I mit projekt tjekker CI’en primært:
-
-at koden kan kompileres
-
-at tests kører
-
-at builden er reproducerbar
-
-Konkret:
-
-Maven test
-
-Java-version er korrekt
-
-dependencies kan hentes
-
-👉 Det er klassisk CI og matcher industripraksis.
-
-3. Overblik over mit GitHub Actions-setup
-
-Jeg har delt mit workflow op i flere filer:
-
-ci.yml – entrypoint
-
-java-test.yml – tester Java-kode
-
-docker-ci.yml – container-test / delivery
-
-Det gør workflowet:
-
-mere overskueligt
-
-genbrugeligt
-
-nemt at forklare
-
-4. jobs vs steps
-
-Jobs er de overordnede opgaver – steps er de enkelte trin.
-
-Et job:
-
-kører på én runner
-
-kan køre parallelt med andre jobs
-
-Et step:
-
-fx checkout, setup Java, kør Maven
-
-Eksempel:
-
-job: java-test
-
-step: checkout
-
-step: setup JDK
-
-step: mvn test
-
-5. uses vs run
-
-uses:
-
-bruger en færdig action fra GitHub Marketplace
-
-fx actions/checkout
-
-run:
-
-kører shell-kommandoer
-
-fx mvn test eller docker compose up
-
-I mit projekt:
-
-uses til standard-opgaver
-
-run når jeg selv vil styre processen
-
-6. Caching i GitHub Actions
-
-Jeg cacher:
-
-Maven dependencies (~/.m2/repository)
-
-Hvorfor?
-
-Maven downloader ellers alt hver gang
-
-CI bliver meget langsommere
-
-Cache key
-key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-
-
-Hvis pom.xml ændrer sig → ny cache
-
-Hvis ikke → cache hit
-
-👉 Cache ligger hos GitHub under Actions → Caches
-
-7. Hash-pinning (sikkerhed)
-
-Jeg hash-pinner actions:
-
-uses: actions/checkout@<commit-sha>
-
-
-Formål:
-
-sikkerhed i supply chain
-
-undgår at en action ændrer adfærd uden jeg ved det
-
-👉 Jeg bruger commit SHA, ikke bare @v6.
-
-8. Manuel trigger
-
-Jeg har:
-
-workflow_dispatch:
-
-
-Det betyder:
-
-workflow kan køres manuelt
-
-godt til demo og fejlsøgning
-
-👉 Jeg kan vise det live på GitHub.
-
-9. Opsummering (emne 1)
-
-Jeg har en CI-pipeline
-
-Den tester Java-kode
-
-Den bruger caching
-
-Den er opdelt i jobs
-
-Den er sikker (hash-pinning)
-
-Den laver delivery, ikke deployment

@@ -1,0 +1,37 @@
+1 Hvem bestemmer hvilken Ip adresse et domæne peger på
+
+Den autoritative navne server,
+Du laver en A record
+
+2 Hvillke slags records findes der
+A
+AAAA - ipv6
+Cname
+MX - mails
+
+3 TTL = Time to live
+Hvor lang tid dit domæne skal caches
+
+4 Hvad er forskellen på en autoritativ navneserver og en cachende navneserver? 
+Autoritativ navneserver = det datacenter den rammer til sidst. Som holder din a record
+Cachende navneserver = DNS Resolver = Cacher resultatet
+
+
+
+Eksempler
+
+1 GET POST + Statuskoder
+
+lav nslookup på ek.dk 
+vis et http kald
+
+dnschecker.org søg på ek.dk
+
+gå på devtools på ek.dk og se på headers ved at gå i netværk og tryk på en
+
+du skal nok også vise noget i wireshark
+
+
+
+
+

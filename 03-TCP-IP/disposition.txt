@@ -1,0 +1,39 @@
+1 Gå i gennem OSI modellen og TCP/IP
+
+#TCP/IP Model
+4. Application layer: 
+3. Transport layer: 
+2. Internet layer:
+1. Network access layer:
+
+#OSI Model
+1. Application - /HTTP og HTTPS
+2. Presentation - Kryptering af HTTPS
+3. Session - Forbindelse/Session
+4. Transport - TCP / UDP porte
+5. Network - IP-adresser / routing
+6. Data Link - MAC
+7. Physical - Kabel/Wifi
+
+
+2 Hvad er porte?
+- Nævn nogle specifikke porte
+
+3 Hvad er forskellen på lokal og public ip-adresse og macadresse
+
+
+Wireshark nu - connect til ek.dk og pause
+4 hvad er src og dst for en ip pakke
+
+Handshake 3 way
+
+Hvordan søger jeg i wireshark
+
+Forklar nslookup
+
+Filtrer fra en hjemmeside eller din egen vm
+
+Connect til dit telefonwifi og vis hvordan du får tildelt en Ip adrsse med DHCP
+
+Vis en TCP TearDown
+

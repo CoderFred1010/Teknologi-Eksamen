@@ -1,0 +1,38 @@
+1 En terminal er programmet hvor du kan skrive tekstkommandoer altså en ui
+En shell er en modtager kommandoerne
+
+2 Hvad er ssh
+Public og privatkey
+Serveren sender en puzzle som signeres af min privatkey
+
+
+Eksempler hav en tom vm klar
+
+1 ssh ind i den
+
+lav nogle mapper og filer
+
+download vim
+
+skriv i en fil og grep
+
+vis de sidste 6 med tail
+
+cat
+
+echo > overskriv
+echo >> append
+
+vim script.sh
+
+#!/bin/bash
+echo "HELLO FROM FILE"
+ls -al
+
+./
+
+chmod 
+
+scp fil.txt root@SERVER_IP:/root/
+
+scp "fil" "root@IP":/root/
