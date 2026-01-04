@@ -4,23 +4,21 @@ on:
   workflow_call:
 
 jobs:
-  build:
+  docker-build-and-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t app .
+      - name: Build and start container with Docker Compose
+        run: docker compose up -d --build
 
-      - name: Run container
-        run: docker run -d -p 3000:3000 app
+      - name: Wait for application to start
+        run: sleep 15
 
-      - name: Wait for app
-        run: sleep 10
-
-      - name: Test application
+      - name: Test application endpoint
         run: curl -f http://localhost:3000
 
-      - name: Stop container
-        run: docker stop $(docker ps -q)
+      - name: Stop and clean up containers
+        run: docker compose down
