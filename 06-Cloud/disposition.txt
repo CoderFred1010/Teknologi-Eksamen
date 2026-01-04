@@ -1,6 +1,5 @@
 
-
-1 “Jeg har arbejdet med Cloud på IaaS-niveau, hvor jeg selv opretter en Linux-VM.
+1 Jeg har arbejdet med Cloud på IaaS-niveau, hvor jeg selv opretter en Linux-VM.
 og skal installere docker med images 
 
 Applikationen deployes som en Docker-container, og jeg logger ind via SSH med public key authentication.

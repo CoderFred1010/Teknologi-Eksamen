@@ -1,3 +1,5 @@
+SNAK
+
 1 Gå i gennem OSI modellen og TCP/IP
 
 #TCP/IP Model

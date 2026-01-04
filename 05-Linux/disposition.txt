@@ -1,3 +1,5 @@
+SNAK
+
 1 En terminal er programmet hvor du kan skrive tekstkommandoer altså en ui
 En shell er en modtager kommandoerne
 

@@ -1,4 +1,6 @@
-1 Hvad er CI / CD
+SNAK
+
+Hvad er CI / CD
 
 2 Hvad er pointen
 
@@ -13,5 +15,6 @@ Gå i gennem Java-test
 
 gå igennem push-til-ghcr
 
+find en hashpin fra en 3rd party
 
 
