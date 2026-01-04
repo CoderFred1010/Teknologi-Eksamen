@@ -15,10 +15,13 @@ jobs:
         run: docker compose up -d --build
 
       - name: Wait for application to start
-        run: sleep 15
+        run: sleep 40
 
       - name: Test application endpoint
         run: curl -f http://localhost:3000
+
+      - name: Show container logs
+        run: docker compose logs
 
       - name: Stop and clean up containers
         run: docker compose down
