@@ -1,4 +1,4 @@
-name: docker-ci.yml
+name: docker-ci
 
 on:
   workflow_call:
@@ -8,17 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-      - name: Test container
-        run: |
-          # Run the container in detached mode
-          docker compose up -d
-          
-          # Wait for a few seconds to ensure the container is up and running
-          sleep 90
-          
-          # Test the application endpoint
-          curl -f http://localhost:3000 || exit 1
-          
-          # Stop and remove the container
-          docker compose down
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t app .
+
+      - name: Run container
+        run: docker run -d -p 3000:3000 app
+
+      - name: Wait for app
+        run: sleep 10
+
+      - name: Test application
+        run: curl -f http://localhost:3000
+
+      - name: Stop container
+        run: docker stop $(docker ps -q)
